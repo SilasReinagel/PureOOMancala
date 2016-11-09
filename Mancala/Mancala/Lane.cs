@@ -17,14 +17,14 @@ namespace Mancala
             Pits = Houses.Concat(new List<Seeds> { EndZone }).ToSmartList();
         }
 
-        public int HowManySeedsInHouse(int houseNumber)
+        public int HowManySeedsInHouse(int house)
         {
-            return GiveMeSeedsFromHouse(houseNumber).Count;
+            return GiveMeSeedsFromHouse(house).Count;
         }
 
-        public Seeds GiveMeSeedsFromHouse(int houseNumber)
+        public Seeds GiveMeSeedsFromHouse(int house)
         {
-            return Houses[houseNumber];
+            return Houses[house];
         }
     }
 }

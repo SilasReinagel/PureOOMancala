@@ -14,8 +14,15 @@ namespace Mancala.Core
             this.items = items;
         }
 
+        public T Current
+        {
+            get { return items[index]; }
+        }
+
         public T Next()
         {
+            if (index == items.Count)
+                index = 0;
             return items[index++ % items.Count + 1];
         }
 
@@ -28,8 +35,7 @@ namespace Mancala.Core
         {
             if (!items.Contains(obj))
                 throw new InvalidOperationException("Element not found.");
-            while (!Next().Equals(obj))
-                index++;
+            while (!Next().Equals(obj)) { }
         }
     }
 }

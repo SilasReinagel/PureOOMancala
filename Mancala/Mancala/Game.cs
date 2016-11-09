@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Mancala.Core;
+﻿using Mancala.Core;
 
 namespace Mancala
 {
@@ -8,6 +7,7 @@ namespace Mancala
         private readonly Board board;
         private readonly SmartList<Player> players;
         private readonly LoopingSequence<Player> turnOrder;
+        private readonly ConditionalAction updateTurn;
 
         private Player currentPlayer;
 
@@ -16,6 +16,7 @@ namespace Mancala
             this.board = board;
             players = new SmartList<Player>(firstPlayer, secondPlayer);
             turnOrder = new LoopingSequence<Player>(players);
+            updateTurn = new ConditionalAction(() => !board.WasLastSeedSownIntoEndZone(CurrentLane), ChangeTurn);
         }
 
         public void Start()
@@ -25,9 +26,11 @@ namespace Mancala
 
         public void Move(int house)
         {
-            board.SowSeedsFrom(players.IndexOf(currentPlayer), house);
-            ChangeTurn();
+            board.SowSeedsFrom(CurrentLane, house);
+            updateTurn.Invoke();
         }
+
+        private int CurrentLane { get { return players.IndexOf(currentPlayer); } }
 
         private void ChangeTurn()
         {

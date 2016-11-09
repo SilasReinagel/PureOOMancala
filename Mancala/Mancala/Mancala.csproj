@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ConditionalAction.cs" />
     <Compile Include="Core\SmartList.cs" />
     <Compile Include="Core\LoopingSequence.cs" />
     <Compile Include="Core\SmartListExtensions.cs" />

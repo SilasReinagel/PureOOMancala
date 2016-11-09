@@ -19,12 +19,17 @@ namespace Mancala
             return lanes[lane];
         }
 
-        public void SowSeedsFrom(int laneNumber, int house)
+        public void SowSeedsFrom(int lane, int house)
         {
-            var seeds = GiveMeLane(laneNumber).GiveMeSeedsFromHouse(house);
+            var seeds = GiveMeLane(lane).GiveMeSeedsFromHouse(house);
             pits.AdvanceTo(seeds);
             while (seeds.Count > 0)
                 seeds.SowInto(pits.Next());
+        }
+
+        public bool WasLastSeedSownIntoEndZone(int lane)
+        {
+            return pits.Current == GiveMeLane(lane).EndZone;
         }
     }
 }
